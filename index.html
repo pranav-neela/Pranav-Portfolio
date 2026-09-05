@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pranav Neela | Content Operations & Growth Marketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #090a0f;
+      --bg-secondary: #11131a;
+      --bg-tertiary: #181b24;
+      --border-subtle: #232735;
+      --border-accent: #333a4d;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 10, 15, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .cta-button {
+      background: var(--accent);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .cta-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-accent);
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cta-secondary:hover {
+      background: var(--border-subtle);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 88px 0 64px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    .hero-title {
+      font-size: 3.25rem;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin-bottom: 20px;
+      max-width: 880px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 50%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      max-width: 760px;
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    /* Quantitative Scoreboard */
+    .metrics-bar {
+      margin: 40px 0 88px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      padding: 24px;
+      border-radius: var(--radius-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .metric-val {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .metric-val.green { color: var(--accent-emerald); }
+    .metric-val.indigo { color: #818cf8; }
+    .metric-val.cyan { color: var(--accent-cyan); }
+
+    .metric-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .metric-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Section Layout */
+    .section-title-wrap {
+      margin-bottom: 48px;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .section-heading {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    /* Case Studies Grid */
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-bottom: 96px;
+    }
+
+    .case-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .case-card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+    }
+
+    .case-card.full-width {
+      grid-column: span 2;
+    }
+
+    .case-badge-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 0.74rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .case-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .case-summary {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .case-stat-strip {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .strip-item-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .strip-item-lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .key-points {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .key-points li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .key-points li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Skills Grid */
+    .skills-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      margin-bottom: 96px;
+    }
+
+    .skills-cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin-top: 36px;
+    }
+
+    .skill-col-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-list {
+      list-style: none;
+    }
+
+    .skill-list li {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Education Block */
+    .edu-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      margin-bottom: 96px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .edu-main h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .edu-sub {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    .edu-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 64px 0 80px;
+      background: var(--bg-primary);
+    }
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-meta {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 992px) {
+      .case-grid { grid-template-columns: 1fr; }
+      .case-card.full-width { grid-column: span 1; }
+      .metrics-bar { grid-template-columns: repeat(2, 1fr); }
+      .skills-cluster-grid { grid-template-columns: 1fr; }
+      .edu-card { flex-direction: column; gap: 20px; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-title { font-size: 2.35rem; }
+      .metrics-bar { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .footer-wrap { flex-direction: column; gap: 24px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="brand">
+        PRANAV NEELA
+        <span class="brand-pill">OPS × AI × DATA</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#metrics">Impact</a></li>
+        <li><a href="#work">Case Studies</a></li>
+        <li><a href="#skills">Competencies</a></li>
+        <li><a href="#education">Background</a></li>
+      </ul>
+      <a href="mailto:pranav.neela@gmail.com" class="cta-button">
+        Contact Me
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="status-dot"></span> Available for Ops, AI & Growth Roles
+      </div>
+      <h1 class="hero-title">
+        Building <span>Zero-Lag</span> Content Pipelines & Data-Driven Growth Models.
+      </h1>
+      <p class="hero-subtitle">
+        BBA graduate from NMIMS with hands-on experience scaling generative AI video operations to 1,000+ monthly assets and engineering service SLA turnarounds across 27 operational centers.
+      </p>
+      <div class="hero-actions">
+        <a href="mailto:pranav.neela@gmail.com" class="cta-button">Get in Touch</a>
+        <a href="https://linkedin.com" target="_blank" class="cta-secondary">LinkedIn Profile</a>
+        <a href="#work" class="cta-secondary">Explore Projects ↓</a>
+      </div>
+    </section>
+
+    <!-- Metrics Scoreboard -->
+    <section id="metrics" class="metrics-bar">
+      <div class="metric-card">
+        <div class="metric-val indigo">1,000+</div>
+        <div class="metric-label">Monthly Video Velocity</div>
+        <div class="metric-desc">156.7% quota attainment (45.5 assets/day) across a 22-day production cycle.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val green">+14.0%</div>
+        <div class="metric-label">SLA Compliance Lift</div>
+        <div class="metric-desc">Raised service session adherence from 67.5% to 81.5% at Toothsi/skinnsi.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val cyan">3,048</div>
+        <div class="metric-label">Booking Logs Audited</div>
+        <div class="metric-desc">Identified root causes across clinic & home appointments to lower cancellations.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val">3.27</div>
+        <div class="metric-label">NMIMS BBA (CGPA / 4.0)</div>
+        <div class="metric-desc">Specialized in TQM, Predictive Marketing Analytics & AI-Driven Strategy.</div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section id="work">
+      <div class="section-title-wrap">
+        <span class="section-tag">// APPLIED EXPERIENCE</span>
+        <h2 class="section-heading">Featured Operations & Analytics Case Studies</h2>
+      </div>
+
+      <div class="case-grid">
+        <!-- Case 1: Video Engine -->
+        <div class="case-card full-width">
+          <div>
+            <div class="case-badge-group">
+              <span class="tag">AI Content Pipelines</span>
+              <span class="tag">Movate Technologies</span>
+              <span class="tag">High-Velocity Operations</span>
+              <span class="tag">Editorial QA</span>
+            </div>
+            <h3 class="case-title">Scaling Digital Video Operations: 1,000+ Finished Assets at 156.7% Quota</h3>
+            <p class="case-summary">
+              Engineered a high-throughput video production workflow to convert breaking political/celebrity news and evergreen consumer listicles into brand-compliant video assets under strict publication cycles.
+            </p>
+
+            <div class="case-stat-strip">
+              <div>
+                <div class="strip-item-val">45.5</div>
+                <div class="strip-item-lbl">Daily Finished Output</div>
+              </div>
+              <div>
+                <div class="strip-item-val">10.5 min</div>
+                <div class="strip-item-lbl">Average Cycle Time</div>
+              </div>
+              <div>
+                <div class="strip-item-val">100%</div>
+                <div class="strip-item-lbl">Copyright Compliance</div>
+              </div>
+            </div>
+
+            <ul class="key-points">
+              <li><strong>AI-Assisted Workflow:</strong> Integrated prompt-based generative tools to rapidly synthesize raw releases into high-retention video scripts and headlines.</li>
+              <li><strong>Narrative Pacing & Editorial QA:</strong> Deployed 3–4 second visual transitions, dynamic kinetic typography, and strict aspect-ratio adaptation (16:9 & 9:16) for mobile audience retention.</li>
+              <li><strong>Asset Licensing:</strong> Curated licensed media catalogues (Getty Images) with verified metadata attribution to preserve brand integrity.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Case 2: Toothsi SLA -->
+        <div class="case-card">
+          <div>
+            <div class="case-badge-group">
+              <span class="tag">Total Quality Management</span>
+              <span class="tag">Toothsi / makeO</span>
+              <span class="tag">Service Operations</span>
+            </div>
+            <h3 class="case-title">Service Quality Engineering & SLA Duration Optimization</h3>
+            <p class="case-summary">
+              Addressed high customer drop-off risks across 9 metropolitan markets by auditing ideal vs. actual service duration logs and standardizing clinical operational procedures.
+            </p>
+
+            <div class="case-stat-strip">
+              <div>
+                <div class="strip-item-val green">81.5%</div>
+                <div class="strip-item-lbl">Post-Audit SLA (was 67.5%)</div>
+              </div>
+              <div>
+                <div class="strip-item-val green">-43.0%</div>
+                <div class="strip-item-lbl">Defect Rate Reduction</div>
+              </div>
+              <div>
+                <div class="strip-item-val">27</div>
+                <div class="strip-item-lbl">Clinics Audited</div>
+              </div>
+            </div>
+
+            <ul class="key-points">
+              <li>Identified that 32.5% of early-month sessions failed to hit 80% ideal duration; delivered corrective operational guidelines.</li>
+              <li>Surged Bangalore territory adherence from 68.0% to 90.2% (+22.2% lift) and Pune from 66.2% to 87.1%.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Case 3: Skinnsi Booking Pipeline -->
+        <div class="case-card">
+          <div>
+            <div class="case-badge-group">
+              <span class="tag">Funnel Analytics</span>
+              <span class="tag">Customer Journey</span>
+              <span class="tag">Root-Cause Analysis</span>
+            </div>
+            <h3 class="case-title">Booking Pipeline Friction & Drop-Off Diagnostics</h3>
+            <p class="case-summary">
+              Audited 3,048 clinic and at-home appointments to isolate friction points, understand cancellation drivers, and minimize customer escalation rates.
+            </p>
+
+            <div class="case-stat-strip">
+              <div>
+                <div class="strip-item-val">3,048</div>
+                <div class="strip-item-lbl">Total Logs Evaluated</div>
+              </div>
+              <div>
+                <div class="strip-item-val">46.4%</div>
+                <div class="strip-item-lbl">Escalation Baseline</div>
+              </div>
+              <div>
+                <div class="strip-item-val">1,296</div>
+                <div class="strip-item-lbl">Customer Timing Gaps</div>
+              </div>
+            </div>
+
+            <ul class="key-points">
+              <li>Isolated root causes: customer timing conflicts (1,296), pre-treatment compliance failures (187), and therapist supply limits (83).</li>
+              <li>Designed proactive automated notification frameworks to safeguard the 33.4% reschedule pool.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Case 4: Capstone Research -->
+        <div class="case-card full-width">
+          <div>
+            <div class="case-badge-group">
+              <span class="tag">Predictive Analytics</span>
+              <span class="tag">NMIMS Capstone</span>
+              <span class="tag">ANOVA & Regression</span>
+              <span class="tag">Consumer Science</span>
+            </div>
+            <h3 class="case-title">Quantitative Impact of Multi-Stage Marketing Personalization</h3>
+            <p class="case-summary">
+              Conducted advanced statistical modeling to quantify the relationship between personalized marketing interventions and long-term customer brand loyalty across different stages of the purchase funnel.
+            </p>
+            <ul class="key-points">
+              <li>Employed ANOVA and linear regression to evaluate variance across consumer demographics and purchase frequency stages.</li>
+              <li>Synthesized research findings into executive recommendations for high-growth brands to allocate digital marketing spend into retention-heavy personalization loops.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Stack Section -->
+    <section id="skills" class="skills-section">
+      <div class="section-title-wrap" style="margin-bottom: 0;">
+        <span class="section-tag">// COMPETENCY MATRIX</span>
+        <h2 class="section-heading">Core Skills & Technical Frameworks</h2>
+      </div>
+
+      <div class="skills-cluster-grid">
+        <div>
+          <h4 class="skill-col-title">Operations & Quality</h4>
+          <ul class="skill-list">
+            <li><span>Total Quality Management (TQM)</span> <span>Expert</span></li>
+            <li><span>Queue Architecture & Resource Ops</span> <span>Advanced</span></li>
+            <li><span>SLA Compliance Monitoring</span> <span>Advanced</span></li>
+            <li><span>Root-Cause Defect Diagnostics</span> <span>Advanced</span></li>
+            <li><span>Process Standardization & SOPs</span> <span>Experienced</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="skill-col-title">AI & Media Production</h4>
+          <ul class="skill-list">
+            <li><span>Generative AI Scripting (Claude/GPT)</span> <span>Advanced</span></li>
+            <li><span>AI Video Workflow Engines</span> <span>Advanced</span></li>
+            <li><span>CapCut / Premiere Editing</span> <span>Proficient</span></li>
+            <li><span>Licensed Asset QA (Getty)</span> <span>Advanced</span></li>
+            <li><span>Kinetic Subtitles & Short-Form Video</span> <span>Expert</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="skill-col-title">Marketing & Analytics</h4>
+          <ul class="skill-list">
+            <li><span>Statistical Modeling (ANOVA/Regr.)</span> <span>Advanced</span></li>
+            <li><span>Tableau & Data Visualization</span> <span>Proficient</span></li>
+            <li><span>Google Analytics & Meta Ads</span> <span>Certified</span></li>
+            <li><span>Salesforce Pipeline Hygiene</span> <span>Experienced</span></li>
+            <li><span>A/B Testing & Personalization</span> <span>Advanced</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+      <div class="section-title-wrap">
+        <span class="section-tag">// EDUCATION</span>
+        <h2 class="section-heading">Academic Background</h2>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-main">
+          <h3>Narsee Monjee Institute of Management Studies (NMIMS), Mumbai</h3>
+          <div class="edu-sub">Bachelor of Business Administration – Management & Marketing (CGPA: 3.27 / 4.00)</div>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 680px;">
+            Pravin Dalal School of Entrepreneurship & Family Business Management (AACSB & EQUIS Accredited). Rigorous 3-year curriculum blending core business frameworks with specialized training in data sciences and modern marketing.
+          </p>
+          <div class="edu-tags">
+            <span class="tag">Total Quality Management</span>
+            <span class="tag">AI-Powered Marketing</span>
+            <span class="tag">Predictive Analytics</span>
+            <span class="tag">Consumer Behaviour</span>
+            <span class="tag">Operations Management</span>
+          </div>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.85rem;">
+          2022 — 2025
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-wrap">
+      <div>
+        <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 4px;">Pranav Neela</div>
+        <div class="footer-meta">Hyderabad, India • Open to Relocate • pranav.neela@gmail.com</div>
+      </div>
+      <div>
+        <a href="mailto:pranav.neela@gmail.com" class="cta-button">Start a Conversation →</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
