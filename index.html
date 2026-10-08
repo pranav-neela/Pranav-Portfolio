@@ -274,17 +274,59 @@
       padding-left: 10px;
     }
 
+    /* Video Player & Fallback Card Styling */
     .video-wrap {
       width: 100%;
       aspect-ratio: 16 / 9;
-      background: var(--bg);
+      background: linear-gradient(135deg, #131722 0%, #0c0e15 100%);
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 16px;
       border: 1px solid var(--border);
       position: relative;
     }
-    .video-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-fallback-card {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(99, 102, 241, 0.12) 0%, rgba(16, 18, 26, 0.95) 100%);
+      border-radius: 8px;
+    }
+    .play-btn-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    }
+    .fallback-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .fallback-subtitle {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
 
     .table-scroll {
       width: 100%;
@@ -408,10 +450,14 @@
             <h3>Breaking News Video Packaging: Pacing & Visual Retainers</h3>
             <p>Rapid synthesis of political and sports news into a high-retention video asset with dynamic 3-second cuts and kinetic captions.</p>
             <div class="video-wrap">
-              <video controls preload="metadata">
+              <video controls playsinline preload="metadata" onerror="handleVideoError(this)">
                 <source src="trumpcommentsontigerwoodssu-6a9a57ccff59f61e6c18d6c9.mp4" type="video/mp4">
-                Your browser does not support the video tag.
               </video>
+              <div class="video-fallback-card" style="display: none;">
+                <div class="play-btn-badge">▶</div>
+                <div class="fallback-title">Breaking News Video Asset</div>
+                <div class="fallback-subtitle">Short-Form Pacing &amp; Kinetic Caption Prototype</div>
+              </div>
             </div>
           </div>
           <ul class="bullets">
@@ -431,10 +477,14 @@
             <h3>Consumer Explainer: 12 Hidden Driving Costs</h3>
             <p>Translating multi-layered automotive financial metrics (depreciation, loan interest, tire maintenance) into an engaging video listicle.</p>
             <div class="video-wrap">
-              <video controls preload="metadata">
+              <video controls playsinline preload="metadata" onerror="handleVideoError(this)">
                 <source src="12drivingcostscanadiansdont-6a9abbddaa04a8cfc194a8d8.mp4" type="video/mp4">
-                Your browser does not support the video tag.
               </video>
+              <div class="video-fallback-card" style="display: none;">
+                <div class="play-btn-badge">▶</div>
+                <div class="fallback-title">Consumer Explainer Listicle</div>
+                <div class="fallback-subtitle">Financial &amp; Mechanical B-Roll Script Integration</div>
+              </div>
             </div>
           </div>
           <ul class="bullets">
@@ -596,6 +646,23 @@
         }
       });
     }
+
+    function handleVideoError(videoEl) {
+      videoEl.style.display = 'none';
+      const fallback = videoEl.nextElementSibling;
+      if (fallback) {
+        fallback.style.display = 'flex';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.video-wrap video').forEach(video => {
+        const source = video.querySelector('source');
+        if (source) {
+          source.addEventListener('error', () => handleVideoError(video));
+        }
+      });
+    });
   </script>
 </body>
 </html>
